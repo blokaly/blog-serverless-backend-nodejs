@@ -6,7 +6,8 @@ export class BookConverter{
     static toDto(val: BookModel): BookDto {
         return {
             id: val.id,
-            title: val.title
+            title: val.title,
+            author: val.author
         };
     }
 
@@ -14,7 +15,8 @@ export class BookConverter{
         return val.map(element =>  {
             return {
                 id: element.id,
-                title: element.title
+                title: element.title,
+                author: element.author
             }
         });
     }
@@ -22,7 +24,8 @@ export class BookConverter{
     static toModel(val: BookDto): BookModel {
         return {
             id: val.id,
-            title: val.title
+            title: val.title,
+            author: val.author
         };
     }
 }

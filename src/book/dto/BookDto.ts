@@ -1,4 +1,5 @@
 export interface BookDto{
     id: number;
-    title: string
+    title: string;
+    author: string
 }

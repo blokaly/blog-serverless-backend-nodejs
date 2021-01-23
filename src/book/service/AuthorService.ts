@@ -1,12 +1,11 @@
-import {BookModel} from "../model/BookModel";
+import {AuthorModel} from "../model/AuthorModel";
 
-export class BookService{
-    public static async saveBook(book: BookModel){
+export class AuthorService{
+    public static async saveAuthor(author: AuthorModel){
         try {
-            await BookModel.create({
-                id: book.id,
-                title: book.title,
-                author: book.author
+            await AuthorModel.create({
+                id: author.id,
+                name: author.name
             });
 
         } catch (error) {
@@ -16,14 +15,13 @@ export class BookService{
     }
 
 
-    public static async updateBook(book: BookModel){
+    public static async updateAuthor(author: AuthorModel){
         try{
-            await BookModel.update({
-                title: book.title,
-                author: book.author
+            await AuthorModel.update({
+                name: author.name
             },{
                 where: {
-                    id: book.id
+                    id: author.id
                 }
             });
 
@@ -33,15 +31,15 @@ export class BookService{
         }
     }
 
-    public static async getBookById(bookId: string): Promise<BookModel>{
+    public static async getAuthorById(authorId: string): Promise<AuthorModel>{
         try{
-            const resp =  await BookModel.findByPk(bookId);
+            const resp =  await AuthorModel.findByPk(authorId);
 
             if (typeof resp !== 'undefined' && resp !== null){
                 return resp;
             }else{
 
-                throw new Error(`Book ${bookId} not found`);
+                throw new Error(`Author ${authorId} not found`);
             }
 
         }catch (error){
@@ -50,10 +48,10 @@ export class BookService{
         }
     }
 
-    public static async listBooks(): Promise<BookModel[]>{
+    public static async listAuthors(): Promise<AuthorModel[]>{
         try{
 
-            return await BookModel.findAll();
+            return await AuthorModel.findAll();
 
         }catch (error){
             console.error(error.name);
@@ -61,17 +59,17 @@ export class BookService{
         }
     }
 
-    public static async deleteBook(bookId: string){
+    public static async deleteAuthor(authorId: string){
         try{
-            const deletedRows = await BookModel.destroy({
+            const deletedRows = await AuthorModel.destroy({
                 where: {
-                    id: bookId
+                    id: authorId
                 }
             });
 
             console.log(`deleted ${deletedRows} rows`);
             if (deletedRows === 0){
-                throw new Error(`Book ${bookId} not found`);
+                throw new Error(`Author ${authorId} not found`);
             }
 
         }catch (error) {
